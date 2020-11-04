@@ -19,7 +19,7 @@ public class domuzOyun {
 		
 			
 	}
-	public static void theChoice() {// the prompt for the plater to choose between holding or rolling again
+	public static void theChoice() {// the prompt for the player to choose between holding or rolling again
 		System.out.println("You can chose to hold or roll again.");
 		System.out.println("To roll again press 'r' or 'h' to hold.");
 		keyboard = new Scanner(System.in);
@@ -109,47 +109,44 @@ public class domuzOyun {
 	public static int computerGame() {
 		do {
 			roll();
-			if((dice1 == 6)||(dice2 == 6)){// if you roll a six.
+			if((dice1 == 6)||(dice2 == 6)){// if the computer rolls a six.
 				System.out.println("Computer rolled a 6 and has lost its turn.");
 				System.out.println("Computer turn score is set to 0");
 				computerTurnZero();
 				System.out.println("The computer's total score is: " + computerTotalPoints);
 				humanGame();
 
-			}else if ((dice1 == 6) && (dice2 == 6)){// if you roll two sixes.
-				System.out.println("Computer rolled two sixes and your total score is set to 0");
+			}else if ((dice1 == 6) && (dice2 == 6)){// if the computer rolls two sixes.
+				System.out.println("Computer rolled two sixes and its total score is set to 0");
 				System.out.println("Computer has lost its turn");
 				computerTotalPoints = 0;
 
 
-			}else if (computerTotalPoints >= 100) {// if you score over 100.
+			}else if (computerTotalPoints >= 100) {// if the computer scores over 100.
 				System.out.println("Computer rolled: " + dice1 + " and " + dice2);
-				System.out.println("Computer's total score is: " + humanTotalPoints);
+				System.out.println("Computer's total score is: " + computerTotalPoints);
 				System.out.println("Congratulations Computer! you win!");
 				System.exit(0);
 
-			}else if (dice1 == dice2){// if you roll a double.
+			}else if (dice1 == dice2){// if the computer rolls a double.
 				newDice = (dice1+dice2)*2;
 				computerTotalPoints = newDice + computerTotalPoints;
 				System.out.println("Computer rolled " + dice1 + " and " + dice2);
 				System.out.println("Computer rolled doubles!");
 				System.out.println("Computer will receive double the points!");
-				System.out.println("Computer's total score is: " + humanTotalPoints);
+				System.out.println("Computer's total score is: " + computerTotalPoints);
 				computerGame();
-
-
 			}else {
 				computerTotalPoints = dice1 + dice2 + computerTotalPoints;
 				computerTurnScore();
 				System.out.println("Computer's total score is: " + computerTotalPoints);
-				System.out.println("The computer's total score is: " + computerTotalPoints);
+				if (computerTotalPoints >= 100) {
+					System.out.println("Congratulations Computer! you win!");
+					System.exit(0);
+				}
 				computerGame();
 
-			}if(computerTurnPoints >= 20) {
-				System.out.println("Computer scored " + computerTurnPoints + " its turn ends now.");
-				System.out.println("Now it is your turn to roll!");
-				humanGame();
-		}
+			}
 		}while (computerTurn);// this boolean returns the dices.
 		
 		return dice1 + dice2;
